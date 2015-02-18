@@ -11,7 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211180103) do
+ActiveRecord::Schema.define(version: 20150218032528) do
+
+  create_table "categories", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "keywords"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "ratings", force: true do |t|
+    t.integer  "review_id"
+    t.integer  "category_id"
+    t.integer  "rating"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "ratings", ["category_id"], name: "index_ratings_on_category_id"
+  add_index "ratings", ["review_id"], name: "index_ratings_on_review_id"
+
+  create_table "reviews", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["company_id"], name: "index_reviews_on_company_id"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email"

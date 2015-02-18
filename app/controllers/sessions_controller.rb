@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   def new
   	@user = User.new
+    if params[:user_created] == 'true'
+      @user_created_message = 'User successfully created!'
+    end
   end
 
   def create
@@ -15,5 +18,6 @@ class SessionsController < ApplicationController
 
   def destroy
   	session.destroy
+    redirect_to new_session_path
   end
 end
