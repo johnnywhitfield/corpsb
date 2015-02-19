@@ -1,26 +1,25 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:new, :create, :destroy]
-  root "users#index"
 
-  get 'sessions/new' => 'sessions#new', as: :new_session
-  post 'sessions' => 'sessions#create', as: :sessions
-  delete 'sessions/:id' => 'sessions#destroy'
+  get 'home/index'
+  root "home#index"
 
+  #root "users#index"
   
-  root to: 'sessions#new'
+  #root to: 'sessions#new'
 
   delete '/sessions' => 'sessions#destroy', as: 'logout'
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :users, only: [:index, :new, :create, :show]
+  resources :users, only: [:index, :new, :create, :show, :destroy]
   
+  resources :reviews
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  #root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
