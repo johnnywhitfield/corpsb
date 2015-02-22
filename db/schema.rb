@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150219035056) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: true do |t|
     t.string   "title"
     t.string   "description"
@@ -36,8 +39,8 @@ ActiveRecord::Schema.define(version: 20150219035056) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "ratings", ["category_id"], name: "index_ratings_on_category_id"
-  add_index "ratings", ["review_id"], name: "index_ratings_on_review_id"
+  add_index "ratings", ["category_id"], name: "index_ratings_on_category_id", using: :btree
+  add_index "ratings", ["review_id"], name: "index_ratings_on_review_id", using: :btree
 
   create_table "reviews", force: true do |t|
     t.integer  "company_id"
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 20150219035056) do
     t.text     "review_text"
   end
 
-  add_index "reviews", ["company_id"], name: "index_reviews_on_company_id"
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
+  add_index "reviews", ["company_id"], name: "index_reviews_on_company_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -58,4 +61,8 @@ ActiveRecord::Schema.define(version: 20150219035056) do
     t.string   "password_digest"
   end
 
+  add_foreign_key "ratings", "categories"
+  add_foreign_key "ratings", "reviews"
+  add_foreign_key "reviews", "companies"
+  add_foreign_key "reviews", "users"
 end

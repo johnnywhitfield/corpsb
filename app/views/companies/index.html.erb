@@ -1,0 +1,14 @@
+<h1> Companies </h1>
+
+<body>
+	<%= @company.each do |company| %>
+	<tr>
+         <td><%= company.name %></td>
+         <td><%= company.description %></td>
+         <td><%= company.keywords %></td>
+         <td><%= link_to 'Show', company %></td>
+        
+       </tr>
+	<% end %>
+
+</body>

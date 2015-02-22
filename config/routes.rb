@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   
   resources :reviews
 
+  resources :companies
+
+  resources :categories do
+      resources :ratings
+    end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

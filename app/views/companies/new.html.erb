@@ -1,0 +1,9 @@
+<h1>New Company</h1>
+
+<%= form_for @company do |f| %>
+	Name: 			  <%= f.text_field    :name %>
+	Description:   	  <%= f.text_field    :description %>
+	Keywords: 		  <%= f.text_field    :keywords %>
+	<br />
+	<%= f.submit %>
+<% end %>
